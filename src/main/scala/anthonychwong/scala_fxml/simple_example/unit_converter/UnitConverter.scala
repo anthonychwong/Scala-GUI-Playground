@@ -1,0 +1,32 @@
+package anthonychwong.scala_fxml.simple_example.unit_converter
+
+trait UnitConverter {
+  val description: String
+  def run(input: String): String
+
+  override def toString = description
+}
+
+object MMtoInches extends UnitConverter {
+  val description: String = "Millimeters to inches"
+  def run(input: String): String = 
+      try { 
+          (input.toDouble / 25.4).toString 
+      } catch { 
+          case ex: Throwable => ex.toString 
+      }
+}
+
+object InchesToMM extends UnitConverter {
+  val description: String = "Inches to millimeters"
+  def run(input: String): String = 
+      try { 
+          (input.toDouble * 25.4).toString 
+      } catch { 
+          case ex: Throwable => ex.toString 
+      }
+}
+
+class UnitConverters(converters: UnitConverter*) {
+  val available = List(converters : _*)
+}
